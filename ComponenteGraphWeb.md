@@ -5,7 +5,7 @@
 | Autores | João Kruse, Enzo Iwata, Emanuel Oliveira e Álvaro Marques |
 | Objetivo | Exibir um gráfico de curva de nível com a relação sintomas x doenças, analisando seu comportamento |
 | Interface | IGraphWeb |
-
+~~~
 public interface IGraphWeb extends IDataSet{
   public int countSintomasDoencas();
   public int regraTres(int t, int n);
@@ -14,7 +14,7 @@ public interface IGraphWeb extends IDataSet{
   public String[][] constroiGraph();
   public String[][] geraCSV();
 }
-
+~~~
 # Interface IGraphWeb
 ## Exibir um gráfico de curvas de nível mostrando a relação dos sintomas com as doenças
 | Método | Objetivo |
