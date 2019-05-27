@@ -2,6 +2,9 @@ package Tradutor;
 
 import java.util.List;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
+import com.ibm.cloud.sdk.core.service.exception.NotFoundException;
+import com.ibm.cloud.sdk.core.service.exception.RequestTooLargeException;
+import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.security.IamOptions;
 import com.ibm.watson.language_translator.v3.LanguageTranslator;
 import com.ibm.watson.language_translator.v3.model.IdentifiedLanguage;
@@ -12,11 +15,6 @@ import com.ibm.watson.language_translator.v3.model.TranslationResult;
 import com.ibm.watson.language_translator.v3.util.Language;
 
 public class Translator implements ITranslator {
-	
-	public static void main(String args[]) {
-		Translator t = new Translator();
-		System.out.println(t.translation("Bom dia, tudo bem contigo?"));
-	}
 	
 	/*
 	 * Metodo que cria e retorna um novo objeto tradutor ja configurando as verificacoes 
@@ -53,7 +51,7 @@ public class Translator implements ITranslator {
 		// (necessario pois a funcao identify recebe como parametro um objeto desse tipo)
 		 
 		IdentifyOptions t = new IdentifyOptions.Builder().text(text).build();
-		
+
 		/*
 		 *  Cria um objeto ServiceCall, que faz uma request http quando chamado o metodo execute().
 		 *  A funcao getResult retorna o resultado do request executado, que nesse caso sera uma objeto
@@ -85,7 +83,8 @@ public class Translator implements ITranslator {
 	 */
 	
 	public String translation(String text) {
-
+		String retorno = null;
+		
 		// Cria o conversor (LanguageTranslator)
 		LanguageTranslator service = setCredentials();
 
@@ -94,18 +93,36 @@ public class Translator implements ITranslator {
 		
 		//Cria um objeto TranslateOptions que guarda o texto, a lingua para converter e 
 		// a lingua do texto a ser convertido
-		TranslateOptions translateOptions = new TranslateOptions.Builder()
+		// Caso o texto ja esteja em ingles, o retorno vira o proprio texto recebido
+		// Caso o texto seja longo demais ou ocorra outro erro, retorna null
+		try {	
+			TranslateOptions translateOptions = new TranslateOptions.Builder()
 				  .addText(text)
 				  .source(lang)
 				  .target(Language.ENGLISH)
 				  .build();
 
-		//O metodo translate faz uma request com https ao ser executado e o getResult retorna o 
-		// resultado do request em um TranslationResult
-		TranslationResult translationResult = service.translate(translateOptions).execute().getResult();
+			//O metodo translate faz uma request com https ao ser executado e o getResult retorna o 
+			// resultado do request em um TranslationResult
+			TranslationResult translationResult = service.translate(translateOptions).execute().getResult();
+		
+			retorno = translationResult.getTranslations().get(0).getTranslationOutput();
+			
+		}catch(NotFoundException e) { //Erro por nao haver modelo ou lingua de destino = lingua de entrada
+			
+			retorno = text;
+			
+		} catch (RequestTooLargeException e) { //Erro por excesso de caracteres
+			
+			retorno = null;
+			
+		} catch (ServiceResponseException e) { // Classe de erro geral
+
+		   retorno = null;
+		}
 		
 		//Pega a String resultante do translationResult e retorna ela
-		return translationResult.getTranslations().get(0).getTranslationOutput();
+		return retorno;
 
 
 	}
@@ -119,16 +136,17 @@ public class Translator implements ITranslator {
 		// Cria o conversor (LanguageTranslator)
 		LanguageTranslator service = setCredentials();
 
-		// Encontra a lingua do texto a ser convertido
-		String lang = identifyLanguage(text, service);
-		
+		// Converte o texto para ingles, pois eh a lingua com maior suporte de conversoes
+		String eng = Translate.translate(text);
+			
 		//Cria um objeto TranslateOptions que guarda o texto, a lingua para converter e 
 		// a lingua do texto a ser convertido
+		
 		TranslateOptions translateOptions = new TranslateOptions.Builder()
-				  .addText(text)
-				  .source(lang)
-				  .target(Language.ENGLISH)/*Mexer nessa linha ainda, erro "Model not found"*/
-				  .build();
+				.addText(eng)
+				.source(Language.ENGLISH)
+				.target(toLang)
+				.build();
 
 		//O metodo translate faz uma request com https ao ser executado e o getResult retorna o 
 		// resultado do request em um TranslationResult
