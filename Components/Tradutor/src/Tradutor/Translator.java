@@ -132,7 +132,7 @@ public class Translator implements ITranslator {
 	 */
 	
 	public String translation(String text, String toLang) {
-
+		String retorno = null;
 		// Cria o conversor (LanguageTranslator)
 		LanguageTranslator service = setCredentials();
 
@@ -141,19 +141,20 @@ public class Translator implements ITranslator {
 			
 		//Cria um objeto TranslateOptions que guarda o texto, a lingua para converter e 
 		// a lingua do texto a ser convertido
-		
-		TranslateOptions translateOptions = new TranslateOptions.Builder()
-				.addText(eng)
-				.source(Language.ENGLISH)
-				.target(toLang)
-				.build();
+		if(eng != null) {
+			TranslateOptions translateOptions = new TranslateOptions.Builder()
+					.addText(eng)
+					.source(Language.ENGLISH)
+					.target(toLang)
+					.build();
 
-		//O metodo translate faz uma request com https ao ser executado e o getResult retorna o 
-		// resultado do request em um TranslationResult
-		TranslationResult translationResult = service.translate(translateOptions).execute().getResult();
+			//O metodo translate faz uma request com https ao ser executado e o getResult retorna o 
+			// resultado do request em um TranslationResult
+			TranslationResult translationResult = service.translate(translateOptions).execute().getResult();
 		
-		//Pega a String resultante do translationResult e retorna ela
-		return translationResult.getTranslations().get(0).getTranslationOutput();
-
+			//Pega a String resultante do translationResult
+			retorno = translationResult.getTranslations().get(0).getTranslationOutput();
+		}
+		return retorno;
 	}
 }
