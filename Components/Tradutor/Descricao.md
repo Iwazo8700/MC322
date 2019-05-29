@@ -1,4 +1,4 @@
-# Utilizando o módulo tradutor
+# Utilizando o Módulo Tradutor
 
 Para utilizar o módulo do Tradutor é necessário instalar um Jar no link:https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
