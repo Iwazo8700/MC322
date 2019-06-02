@@ -6,6 +6,20 @@
 212466 - Álvaro Marques Macedo
 ~~~
 # Componentes
+# Componente 'Speak'
+Campo | Valor
+----- | -----
+Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
+Objetivo | `Converte o texto para áudio e executa `
+Interface | `ISpeak`
+
+~~~
+public interface ISpeak{
+  public static void speak(String texto);
+}
+~~~
+
 # Componente `Tradutor`
 
 Campo | Valor
@@ -47,6 +61,8 @@ public interface IGraphWeb extends IDataSet{
   public String[][] constroiGraph();
   public String[][] geraCSV();
 }
+  
+  
 ~~~
 # Interface IGraphWeb
 ## Exibir um gráfico de curvas de nível mostrando a relação dos sintomas com as doenças
