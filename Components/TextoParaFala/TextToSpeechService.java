@@ -1,11 +1,5 @@
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.util.Scanner;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,27 +9,13 @@ import javax.sound.sampled.SourceDataLine;
 import com.ibm.cloud.sdk.core.service.security.IamOptions;
 import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
-import com.ibm.watson.text_to_speech.v1.websocket.BaseSynthesizeCallback;
 		
-public class TextToSpeechService{
+public class TextToSpeechService implements IService{
 
 	    private final int BUFFER_SIZE = 128000;
 	    private AudioInputStream audioStream;
 	    private AudioFormat audioFormat;
 	    private SourceDataLine sourceLine;
-
-		public static void main(String args[]) {
-			TextToSpeechService a = new TextToSpeechService();
-			Scanner s = new Scanner(System.in);
-			String p = s.nextLine();
-			s.close();
-			try {
-				a.execute(p);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		
 		/*
 		 * Funcao que configura a conta para permitir acesso ao TextToSpeech da IBM
@@ -71,17 +51,20 @@ public class TextToSpeechService{
 
 			//Enviara o texto atravez de byteArray para o WebSocket onde sera feita a conversao
 			
+			//Cria um inputStream com o audio do texto obtido pelo servico online da ibm
+			//e conecta ele a um audioStream
 			BufferedInputStream bis = new BufferedInputStream(service.synthesize(synthesizeOptions).execute().getResult());
-			
 			audioStream = AudioSystem.getAudioInputStream(bis);
 		    audioFormat = audioStream.getFormat();
+		    
+		    //Cria uma conexao por onde o audio ira ser reproduzido
 		    DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
 		    sourceLine = (SourceDataLine) AudioSystem.getLine(info);
 		    sourceLine.open(audioFormat);
 
 		    sourceLine.start();	    
 		    
-		   
+		   //Reproduz o audio no SourceDataLine ate todos os bytes da stream serem reproduzidos
 		    int nBytesRead = 0;
 		    byte[] abData = new byte[BUFFER_SIZE];
 		    while (nBytesRead != -1) {
