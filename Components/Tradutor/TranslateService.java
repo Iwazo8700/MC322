@@ -12,13 +12,14 @@ import com.ibm.watson.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.language_translator.v3.model.TranslationResult;
 import com.ibm.watson.language_translator.v3.util.Language;
 
-public class TranslateService implements IService {
+public class TranslateService implements IService, ITradutorService {
 	
 	/*
 	 * Metodo que cria e retorna um novo objeto tradutor ja configurando as verificacoes 
 	 * necessarias para utilizar a API watson
 	 */
 	
+	@Override
 	public LanguageTranslator setCredentials() {
 		
 		
@@ -80,6 +81,7 @@ public class TranslateService implements IService {
 	 * Metodo que recebe um texto e retorna ele traduzido para o ingles
 	 */
 	
+	@Override
 	public String translation(String text) throws RequestTooLargeException, ServiceResponseException{
 		String retorno = null;
 		
@@ -122,6 +124,7 @@ public class TranslateService implements IService {
 	 * Metodo que recebe um texto e retorna ele traduzido para uma lingua escolhida
 	 */
 	
+	@Override
 	public String translation(String text, String toLang) throws RequestTooLargeException, ServiceResponseException{
 		String retorno = null;
 		// Cria o conversor (LanguageTranslator)

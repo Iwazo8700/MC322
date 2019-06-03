@@ -10,7 +10,7 @@ import com.ibm.cloud.sdk.core.service.security.IamOptions;
 import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
 		
-public class TextToSpeechService implements IService{
+public class TextToSpeechService implements IService, ITextToSpeechService{
 
 	    private final int BUFFER_SIZE = 128000;
 	    private AudioInputStream audioStream;
@@ -21,6 +21,7 @@ public class TextToSpeechService implements IService{
 		 * Funcao que configura a conta para permitir acesso ao TextToSpeech da IBM
 		 */
 		
+	    @Override
 		public TextToSpeech setCredentials() {
 			
 			//Cria um novo objeto do tipo TextToSpeech
@@ -83,7 +84,7 @@ public class TextToSpeechService implements IService{
 
 		}
 		
-		
+		@Override
 		public void execute(String text) throws Exception{
 			TextToSpeech service = setCredentials();
 
