@@ -1,4 +1,8 @@
+package general;
 import java.util.Scanner;
+
+import speak.Speak;
+import tradutor.Translate;
 
 public class Example {
 	public static void main(String args[]) {

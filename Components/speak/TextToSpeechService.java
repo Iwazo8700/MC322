@@ -1,5 +1,9 @@
+package speak;
+
+import general.IService;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -9,6 +13,7 @@ import javax.sound.sampled.SourceDataLine;
 import com.ibm.cloud.sdk.core.service.security.IamOptions;
 import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
+
 		
 public class TextToSpeechService implements IService, ITextToSpeechService{
 

@@ -1,3 +1,4 @@
+package tradutor;
 import java.util.List;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
 import com.ibm.cloud.sdk.core.service.exception.NotFoundException;
@@ -11,6 +12,8 @@ import com.ibm.watson.language_translator.v3.model.IdentifyOptions;
 import com.ibm.watson.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.language_translator.v3.model.TranslationResult;
 import com.ibm.watson.language_translator.v3.util.Language;
+
+import general.IService;
 
 public class TranslateService implements IService, ITradutorService {
 	

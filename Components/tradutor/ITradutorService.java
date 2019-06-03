@@ -1,3 +1,4 @@
+package tradutor;
 
 public interface ITradutorService {
 	
