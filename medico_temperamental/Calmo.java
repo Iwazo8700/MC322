@@ -94,7 +94,6 @@ public class Calmo implements IEstresse {
             acaoNormal();
     }
     
-    
 }
 
 
