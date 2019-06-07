@@ -9,13 +9,13 @@
 # Componente 'Speak'
 Campo | Valor
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | speak.Speak <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
 Objetivo | `Converte o texto para áudio e executa `
-Interface | `ISpeak`
+Interface | -
 
 ~~~
-public interface ISpeak{
+public class Speak{
   public static void speak(String texto);
 }
 ~~~
@@ -24,13 +24,13 @@ public interface ISpeak{
 
 Campo | Valor
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | tradutor.Translate <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
 Objetivo | `Tradução de textos dee qualquer lingua com suporte no Google Tradutor para português ou inglês `
-Interface | `ITradutor`
+Interface | -
 
 ~~~
-public interface ITradutor{
+public class Translate{
   String translate(String frase);
   String translate(String frase, String lingua);
 }
