@@ -6,6 +6,7 @@
 212466 - Álvaro Marques Macedo
 ~~~
 # Componentes
+obs: Ler o README de cada componente em sua respectiva pasta para ver suas exigências
 # Componente 'Speak'
 Campo | Valor
 ----- | -----
