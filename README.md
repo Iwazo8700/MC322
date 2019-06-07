@@ -20,6 +20,7 @@ public class Speak{
   public static void speak(String texto);
 }
 ~~~
+Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
 # Componente `Tradutor`
 
@@ -36,6 +37,7 @@ public class Translate{
   String translate(String frase, String lingua);
 }
 ~~~
+Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
 ## Detalhamento das Interfaces
 
