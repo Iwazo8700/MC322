@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="/home/ec2018-fra/ra218615/Downloads/ibm-watson-7.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
