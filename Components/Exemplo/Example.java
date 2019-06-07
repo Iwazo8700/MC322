@@ -13,7 +13,7 @@ public class Example {
 			Speak.speak(scan.nextLine());
 		}
 		catch(Exception e) {
-			//Nada
+			System.out.println("Deu errado");
 		}
 		scan.close();
 		System.out.println("Fim");
