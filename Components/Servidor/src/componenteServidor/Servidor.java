@@ -6,6 +6,9 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import com.sun.net.httpserver.*;
+import java.util.Map;
+import java.util.HashMap;
+
 
 public class Servidor implements IServidor{
 
@@ -28,6 +31,7 @@ public class Servidor implements IServidor{
 	public void addContext(String path, HttpHandler h) {
 		HttpContext context = server.createContext(path);
 		context.setHandler(h);
+		
 	}
 
 	public void sendResponse(HttpExchange exchange, String response) throws IOException {
@@ -47,6 +51,18 @@ public class Servidor implements IServidor{
 	public void simpleHandler(HttpExchange exchange) throws IOException{
 		String response = getQuery(exchange);
 		sendResponse(exchange, response);			
+	}
+	
+	public static Map<String,String> splitQuery(String query){
+		Map<String,String> returnMap = new HashMap<String,String>();
+		String [] splitted = query.split("&");
+		String [] temp;
+		for (int i = 0; i < splitted.length; i++) {
+			temp = splitted[i].split("=");
+			returnMap.put(temp[0],temp[1]);
+		}
+		
+		return returnMap;
 	}
 	
 	
