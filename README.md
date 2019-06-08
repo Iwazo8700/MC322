@@ -10,7 +10,7 @@ obs: Ler o README de cada componente em sua respectiva pasta para ver suas exig�
 # Componente 'Speak'
 Campo | Valor
 ----- | -----
-Classe | speak.Speak <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | speak.Speak
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
 Objetivo | `Converte o texto para áudio e executa `
 Interface | -
@@ -26,7 +26,7 @@ Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-s
 
 Campo | Valor
 ----- | -----
-Classe | tradutor.Translate <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | tradutor.Translate
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
 Objetivo | `Tradução de textos dee qualquer lingua com suporte no Google Tradutor para português ou inglês `
 Interface | -
@@ -38,6 +38,34 @@ public class Translate{
 }
 ~~~
 Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
+
+# Componente `Temperamental`
+Campo | Valor
+----- | -----
+Classe | Temperamental.* 
+Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
+Objetivo | `Simula um medico com diferentes temperamentos ou que vai se estressando com o passar do tempo `
+Interface | `IFabricaStress, Estresse`
+
+~~~
+
+public class TemperamentoGeral{
+    public static IFabricaStress CriaTemperamento(String tipo){
+        IFabricaStress retorno = null;
+        if(tipo.equalsIgnoreCase("calmo"))
+            retorno = new CriaCalmo();
+        else if(tipo.equalsIgnoreCase("puto"))
+            retorno = new CriaPuto();
+        else if(tipo.equalsIgnoreCase("putasso"))
+            retorno = new CriaPutasso();
+        else if(tipo.equalsIgnoreCase("real"))
+            retorno = new CriaReal();
+        else if(tipo.equalsIgnoreCase("unico"))
+            retorno = new CriaUnico();
+        return retorno;
+    }
+}
+~~~
 
 ## Detalhamento das Interfaces
 ### Interface `Speak`
