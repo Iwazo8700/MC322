@@ -40,13 +40,19 @@ public class Translate{
 Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
 ## Detalhamento das Interfaces
-
-### Interface `ITradutor`
-`Interface que recebe uma frase em formato de string e traduz para inglês como padrão, caso o usuário deseje ele pode colocar como parâmetro uma língua para se traduzir`.
+### Interface `Speak`
+`Classe que contem metodo que recebe uma string com texto e a reproduz na forma de audio com a pronuncia do ingles`.
 
 Método | Objetivo
 -------| --------
-`traduz` | `Traduzir uma string em qualquer língua para inglês como padrão ou para uma língua desejada por sobrecarga de métodos. `
+`speak` | `Metodo estatico que recebe uma String e reproduz um audio do texto. Funçao void`
+
+### Interface `Tradutor`
+`Classe com metodo que recebe uma frase em formato de string e traduz para inglês como padrão, caso o usuário deseje ele pode colocar como parâmetro uma língua para se traduzir`.
+
+Método | Objetivo
+-------| --------
+`traduz` | `Metodo estatico que traduz uma string para inglês como padrão ou para uma língua desejada por sobrecarga de métodos. Retorna a String traduzida`
 
 # Componente Interface Gráfica para Web
 | Campo | Valor |
