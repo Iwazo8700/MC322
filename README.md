@@ -7,11 +7,11 @@
 ~~~
 # Componentes
 obs: Ler o README de cada componente em sua respectiva pasta para ver suas exigências
-# Componente 'Speak'
+# Componente `Speak`
 Campo | Valor
 ----- | -----
 Classe | speak.Speak
-Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
+Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
 Objetivo | `Converte o texto para áudio e executa `
 Interface | -
 
@@ -22,12 +22,21 @@ public class Speak{
 ~~~
 Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
+## Detalhamento das Interfaces
+### Interface `Speak`
+`Classe que contem metodo que recebe uma string com texto e a reproduz na forma de audio com a pronuncia do ingles`.
+
+Método | Objetivo
+-------| --------
+`speak` | `Metodo estatico que recebe uma String e reproduz um audio do texto. Funçao void`
+
+
 # Componente `Tradutor`
 
 Campo | Valor
 ----- | -----
 Classe | tradutor.Translate
-Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
+Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
 Objetivo | `Tradução de textos dee qualquer lingua com suporte no Google Tradutor para português ou inglês `
 Interface | -
 
@@ -39,11 +48,19 @@ public class Translate{
 ~~~
 Exige a instalação do JAR em: https://github.com/watson-developer-cloud/java-sdk/releases/download/java-sdk-7.0.0/ibm-watson-7.0.0-jar-with-dependencies.jar
 
+## Detalhamento das Interfaces
+### Interface `Tradutor`
+`Classe com metodo que recebe uma frase em formato de string e traduz para inglês como padrão, caso o usuário deseje ele pode colocar como parâmetro uma língua para se traduzir`.
+
+Método | Objetivo
+-------| --------
+`traduz` | `Metodo estatico que traduz uma string para inglês como padrão ou para uma língua desejada por sobrecarga de métodos. Retorna a String traduzida`
+
 # Componente `Temperamental`
 Campo | Valor
 ----- | -----
 Classe | Temperamental.* 
-Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, ´Álvaro Marques`
+Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
 Objetivo | `Simula um medico com diferentes temperamentos ou que vai se estressando com o passar do tempo `
 Interface | `IFabricaStress, Estresse`
 
@@ -67,20 +84,6 @@ public class TemperamentoGeral{
 }
 ~~~
 
-## Detalhamento das Interfaces
-### Interface `Speak`
-`Classe que contem metodo que recebe uma string com texto e a reproduz na forma de audio com a pronuncia do ingles`.
-
-Método | Objetivo
--------| --------
-`speak` | `Metodo estatico que recebe uma String e reproduz um audio do texto. Funçao void`
-
-### Interface `Tradutor`
-`Classe com metodo que recebe uma frase em formato de string e traduz para inglês como padrão, caso o usuário deseje ele pode colocar como parâmetro uma língua para se traduzir`.
-
-Método | Objetivo
--------| --------
-`traduz` | `Metodo estatico que traduz uma string para inglês como padrão ou para uma língua desejada por sobrecarga de métodos. Retorna a String traduzida`
 
 # Componente Interface Gráfica para Web
 | Campo | Valor |
