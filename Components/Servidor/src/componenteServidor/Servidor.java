@@ -17,8 +17,7 @@ public class Servidor implements IServidor{
 	Servidor() throws IOException{
 		server = HttpServer.create(new InetSocketAddress(8500),0);
 	}
-	
-	
+		
 	Servidor(int PORT) throws IOException{
 		server = HttpServer.create(new InetSocketAddress(PORT),0);
 	}
@@ -34,23 +33,22 @@ public class Servidor implements IServidor{
 		
 	}
 
-	public void sendResponse(HttpExchange exchange, String response) throws IOException {
+	public static void sendResponse(HttpExchange exchange, String response) throws IOException {
 		exchange.sendResponseHeaders(200, response.getBytes().length);
 		OutputStream os = exchange.getResponseBody();
 		os.write(response.getBytes());
 		os.close();
-	}
-	
-	public String getQuery(HttpExchange exchange) {
-		URI requestURI = exchange.getRequestURI();
-		String query = requestURI.getQuery();
-		return query;
-	}
-	
+	}	
 	
 	public void simpleHandler(HttpExchange exchange) throws IOException{
 		String response = getQuery(exchange);
 		sendResponse(exchange, response);			
+	}
+	
+	public static String getQuery(HttpExchange exchange) {
+		URI requestURI = exchange.getRequestURI();
+		String query = requestURI.getQuery();
+		return query;
 	}
 	
 	public static Map<String,String> splitQuery(String query){
