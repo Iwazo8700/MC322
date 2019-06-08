@@ -37,7 +37,7 @@ Campo | Valor
 ----- | -----
 Classe | tradutor.Translate
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
-Objetivo | `Tradução de textos dee qualquer lingua com suporte no Google Tradutor para português ou inglês `
+Objetivo | `Tradução de textos de qualquer lingua com suporte no Google Tradutor para português ou inglês `
 Interface | -
 
 ~~~
@@ -62,7 +62,7 @@ Campo | Valor
 Classe | Temperamental.* 
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
 Objetivo | `Simula um medico com diferentes temperamentos ou que vai se estressando com o passar do tempo `
-Interface | `IFabricaStress, Estresse`
+Interface | `Estresse, TemperamentoGeral`
 
 ~~~
 
@@ -70,12 +70,27 @@ public abstract class Estresse{
   public void novoPaciente();
   public void novaPergunta();
  }
-
-public class TemperamentoGeral{
+ 
+ public class TemperamentoGeral{
     public static IFabricaStress CriaTemperamento(String tipo);
 }
-~~~
 
+~~~
+## Detalhamento das Interfaces
+### Interface `Estresse`
+`Classe que contem os metodos de update para que se gere uma frase dependedo da situacao`.
+
+Método | Objetivo
+-------| --------
+`novoPaciente` | `Imprime uma mensagem(ou não) após a consulta com um paciente, e mostra o que o médico quer fazer ou de sua situação mental. Método precisa ser chamado sempre que acabar uma consulta`
+`novaPergunta` | `Imprime uma mensagem(ou não) após uma pergunta ao paciente, e mostra o que o médico quer fazer ou de sua situação mental. Método precisa ser chamado sempre que o medico fizer uma pergunta`
+
+### Interface `TemperamentoGeral`
+`Fabrica de medicos com temperamentos diferentes`
+
+Método | Objetivo
+-------| --------
+`CriaTemperamento` | `Recebe como parametro uma String, dentre elas podendo ser: calmo, puto, putasso, real e unico; a opcao de unico gerara uma situacao para um unico paciente, assim o temperamento do medico mudara com a quantidade de perguntas e pela demora com que elas foram feitas; as opções restantes servem para o caso de um medico que atende varios pacientes, assim simulando o dia de um medico; os outros sao autoexplicativos, o real passa pelos outros estados de forma respectiva indo do medico calmo para o puto e depois para o putasso.`
 
 # Componente Interface Gráfica para Web
 | Campo | Valor |
