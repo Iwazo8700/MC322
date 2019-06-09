@@ -61,7 +61,7 @@ Campo | Valor
 ----- | -----
 Classe | Temperamental.* 
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
-Objetivo | `Simula um medico com diferentes temperamentos ou que vai se estressando com o passar do tempo `
+Objetivo | `Simula um medico com diferentes temperamentos, que vai se estressando com o passar do tempo `
 Interface | `Estresse, TemperamentoGeral`
 
 ~~~
