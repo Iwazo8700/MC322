@@ -1,8 +1,5 @@
 package trabalho;
 
-
-import java.util.Scanner;
-
 public class Patient implements IPatient {
 	private String attributes[];
 	private String patientInstance[];
@@ -16,8 +13,8 @@ public class Patient implements IPatient {
     	return name;
     }
     
-	public String ask(String question) {
-		return "sim";
+	public boolean ask(String question) {
+		return true;
 	}
 
 	public boolean finalAnswer(String answer) {

@@ -2,13 +2,20 @@ package trabalho;
 
 
 import java.util.List;
-
+import jsmaiorjava.implementations.ImprimeAtestado;
+import jsmaiorjava.implementations.Prontuario;
+import jsmaiorjava.implementations.ZumbiTwittero;
+import jsmaiorjava.interfaces.IImprimeAtestado;
+import jsmaiorjava.interfaces.IProntuario;
+import jsmaiorjava.interfaces.IZumbiTwittero;
 import speak.Speak;
+import tradutor.Translate;
 import Temperamental.*;
 import pt.clubedohardware.dataorganizer.DataOrganizer;
 import pt.clubedohardware.node.Tree;
 
 public class Doctor implements IDoctor {
+	String lang;
 	private ITableProducer dataset;
 	private IResponder responder;
 	private Tree tree;
@@ -17,8 +24,8 @@ public class Doctor implements IDoctor {
 	private int[][] symptomFrequency;
 	private IFabricaStress unico;
 	private Estresse medico_unico;
-	private IDoctor eu = this;
 	private String name;
+	private IProntuario p;
 	
 	public Doctor(String name) {
 		this.name = name;
@@ -51,31 +58,33 @@ public class Doctor implements IDoctor {
         
 	public void startInterview() {
 	    
-	    String answer;
+	    boolean answer;
 	    
 	    while(tree.getRoot().getDiseases() == null) {
-	    	System.out.println("Do you have " + dataset.requestAttributes()[tree.getRoot().getSymptom()] + "?");
+	    	System.out.println(Translate.translate("Do you have " + dataset.requestAttributes()[tree.getRoot().getSymptom()].replace("_", " ") + "?", lang));
 	    	answer = responder.ask("Do you have " + dataset.requestAttributes()[tree.getRoot().getSymptom()] + "?");
 	    	medico_unico.novaPergunta();
-	    	if(getAnswer(answer))
-	    		tree.setRoot(tree.getRoot().getDireito());
-	    	else
+	    	if(answer)
 	    		tree.setRoot(tree.getRoot().getEsquerdo());
+	    	else
+	    		tree.setRoot(tree.getRoot().getDireito());
 	    }
 	    for(int i = 0; i < tree.getRoot().getDiseases().size();i++)
-	    	System.out.println("You have" + dataset.requestAttributes()[tree.getRoot().getDiseases().get(i)]);
-	    Speak.speak("You have" + tree.getRoot().getDiseases().toString());
-
+	    	System.out.println("You have " + dataset.requestAttributes()[tree.getRoot().getDiseases().get(i)]);
+	    String a = "";
+	    for(int i = 0; i < tree.getRoot().getDiseases().size();i++)
+	    	a = a + " " + tree.getRoot().getDiseases().get(i);
+	    
+	    Speak.speak("You have" + a);
+	    p = new Prontuario(a, responder.getNome() ,name);
+		IZumbiTwittero t = new ZumbiTwittero(p);
+		t.twittar();
 	}
 	
-	private boolean getAnswer(String answer) {
-		boolean retorno = false;
-		
-		if(answer.contains("sim"))
-			retorno = true;
-		
-		return retorno;
-	}
     
+	public void getAtestado() {
+		IImprimeAtestado i = new ImprimeAtestado(p);
+		i.imprime();
+	}
 }
 
