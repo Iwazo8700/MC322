@@ -121,3 +121,24 @@ public interface IGraphWeb extends IDataSet{
 | coresSintomasDoencas() | Retorna uma String com as cores dos pontos Doença x Sintoma, por uma média ponderada |
 | constroiGraph() | A partir das coresSintomasDoencas(), constrói o restante do gráfico com as cores de cada ponto/pixel, criando visualmente a curva de nível |
 | geraCSV() | salva o gráfico em um arquivo csv, cor por coordenada, que será lido pelo programa web com JavaScript |
+
+#Interface IServidor
+##Cria um servidor HTTP para realizar troca de informações entre diferentes programas
+
+| Método | Objetivo |
+| ------------- | ------------- |
+| initialize() | Inicia o Servidor |
+| addContext(String path, HttpHandler h)  | Adiciona rota ao servidor e seu respectivo Handler |
+
+##Tutorial de como fazer o seu servidor:
+
+Olá, se você está lendo isso tem a chance de querer utilizar nosso servidor :)
+
+Primeiramente, aqui está a referência das classes do componente: [FAZER REFERÊNCIA DO ROLÊ]
+
+Nesse tutorial, vamos aprender a fazer um servidor recebe do cliente dois números inteiros e retorna a soma deles
+
+Para começar, precisamos que você habilite o package com.sun.net.httpserver no seu projeto do eclipse, para fazer isso siga esses passos:
+1. 
+
+
