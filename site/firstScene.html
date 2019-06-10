@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="index.js">		
+		</script>
+		<title></title>
+	</head>
+	<body style="background-color: #ffffcc;">
+		<div style="float: left; width: 100%; text-align: center;">
+			<h1>Para começar, escolha um idioma.</h1>
+			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
+				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=en')">
+					<img src="img/en.png" width="100px" height="100px">
+				</a>
+			</div>
+			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
+				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=pt')">
+					<img src="img/pt.png" width="100px" height="100px">
+				</a>
+			</div>
+		</div>
+	</body>
+</html>
