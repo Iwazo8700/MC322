@@ -141,7 +141,16 @@ Nesse tutorial, vamos aprender a fazer um servidor recebe do cliente dois númer
 Para começar, precisamos que você habilite o package com.sun.net.httpserver no seu projeto do eclipse, para fazer isso siga esses passos:
 1. Configure o Build Path do seu projeto: <br />
 ![Screenshot](imgs/cfgbuildpath.png)
-2. Vá e 
+2. Vá em Acess Rules e aperte em Edit: <br />
+![Screenshot](imgs/bpOpen.png)
+3. Sete com/sun/net/httpserver/\* como acessível <br />
+![Screenshot](imgs/accessible.png)
+4. Aperte OK e depois Apply and Close <br />
+![Screenshot](imgs/finish.png)
+
+Com isso você seta o que é necessário para conseguir usar o servidor, (supondo que você adicionou nosso .jar ao projeto também)
+ 
+
   
 
 
