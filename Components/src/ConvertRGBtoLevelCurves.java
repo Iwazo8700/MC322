@@ -56,6 +56,17 @@ public class ConvertRGBtoLevelCurves implements ICreateFiles{
 	}
 	public String imprimeArray() {
 		String resultado = "";
+		for(int a = 0; a < sintomas.length - 1; a++) {
+			resultado += sintomas[a]+",";			
+		}
+		resultado += "\n";
+		for(int b = 0; b < diagnostico.length; b++) {
+			for(int c = 0; c < diagnostico[b].length; c++) {
+				if(c == diagnostico[b].length - 1 && b > 0 && b <  diagnostico.length - 1)
+					resultado += diagnostico[b][c]+",";
+			}
+		}
+		resultado += "\n";
 		for(int i = 0; i < vetor.length; i++) {
 			for(int j = 0; j < vetor[i].length; j++) {
 				resultado += vetor[i][j]+",";
