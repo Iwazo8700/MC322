@@ -126,8 +126,9 @@ public abstract class Estresse{
 
 
     public void novaPergunta(){
-        numPergunta++;
+        
         update();
+        numPergunta++;
     }
     protected abstract void update();
   }
