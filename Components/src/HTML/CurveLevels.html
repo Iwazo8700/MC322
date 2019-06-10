@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>MC322</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<style>
+		  .csv-input {
+		    	padding: 10px;
+			display: block;
+			margin: 15px auto;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		  }
+	</style>
+    </head>
+    <body>
+        <input type="file" id="csvFileInput" class="csv-input" onchange="handleFiles(this.files)" accept=".csv">
+        <div id="output" style="position: relative; left: 200px;"></div>
+        <script type="text/javascript">
+		function handleFiles(files) {
+			if (window.FileReader) {
+				getAsText(files[0]);
+			} else {
+				alert('FileReader are not supported in this browser.');
+			}
+		}
+
+		function getAsText(fileToRead) {
+			var reader = new FileReader();
+			// Handle errors load
+			reader.onload = loadHandler;
+			reader.onerror = errorHandler;
+			// Read file into memory as UTF-8      
+			reader.readAsText(fileToRead);
+		}
+
+		function loadHandler(event) {
+			var csv = event.target.result;
+			processData(csv);             
+		}
+
+		function processData(csv) {
+		    var allTextLines = csv.split(/\r\n|\n/);
+		    var lines = [];
+		    while (allTextLines.length) {
+			lines.push(allTextLines.shift().split(','));
+		    }
+			console.log(lines);
+			drawOutput(lines);
+		}
+
+		function errorHandler(evt) {
+			if(evt.target.error.name == "NotReadableError") {
+				alert("Canno't read file !");
+			}
+		}
+
+		function drawOutput(lines){
+			//Clear previous data
+			document.getElementById("output").innerHTML = "";
+			var div = document.createElement("div");
+			for (var i = 0; i < lines.length; i++) {
+				//var row = table.insertRow(-1);
+				for (var j = 0; j < lines[i].length; j++) {
+			    //var firstNameCell = row.insertCell(-1);            
+			    var pixel =  document.createElement("div");
+			    pixel.style.position = "absolute";
+			    pixel.style.width = "1px";
+			    pixel.style.height = "1px";
+			    pixel.style.top = i;
+			    pixel.style.left = j;
+			    //pixel.style.display = block;
+
+			    var g = 255 - Math.abs(parseInt(lines[i][j], 10));
+			    var gS = g.toString();
+			    var b = 255 - Math.abs(parseInt(lines[i][j], 10));
+			    var bS = b.toString();
+			    var rgb = "rgb(255, "+bS+","+gS+")";
+			    //console.log(rgb);
+			    pixel.style.background = rgb;
+			    //firstNameCell.appendChild(pixel);
+			    div.appendChild(pixel);
+				}
+			}
+			document.getElementById("output").appendChild(div);
+		}
+	</script>
+    </body>
+</html>
