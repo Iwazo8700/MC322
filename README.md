@@ -122,15 +122,15 @@ public interface IGraphWeb extends IDataSet{
 | constroiGraph() | A partir das coresSintomasDoencas(), constrói o restante do gráfico com as cores de cada ponto/pixel, criando visualmente a curva de nível |
 | geraCSV() | salva o gráfico em um arquivo csv, cor por coordenada, que será lido pelo programa web com JavaScript |
 
-#Interface IServidor
-##Cria um servidor HTTP para realizar troca de informações entre diferentes programas
+# Interface IServidor
+## Cria um servidor HTTP para realizar troca de informações entre diferentes programas
 
 | Método | Objetivo |
 | ------------- | ------------- |
 | initialize() | Inicia o Servidor |
 | addContext(String path, HttpHandler h)  | Adiciona rota ao servidor e seu respectivo Handler |
 
-##Tutorial de como fazer o seu servidor:
+## Tutorial de como fazer o seu servidor:
 
 Olá, se você está lendo isso tem a chance de querer utilizar nosso servidor :)
 
@@ -150,7 +150,13 @@ Para começar, precisamos que você habilite o package com.sun.net.httpserver no
 
 Com isso você seta o que é necessário para conseguir usar o servidor, (supondo que você adicionou nosso .jar ao projeto também)
  
-
+Agora vamos começar o servidor. Primeiramente importe os packages necessários para criar o servidor:
   
+```java
+import componenteServidor.*;
+import java.io.IOException;
+import com.sun.net.httpserver.*;
+```
+
 
 

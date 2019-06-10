@@ -1,7 +1,6 @@
 package componenteServidor;
 
 
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -41,10 +40,7 @@ public class Servidor implements IServidor{
 		os.close();
 	}	
 	
-	public void simpleHandler(HttpExchange exchange) throws IOException{
-		String response = getQuery(exchange);
-		sendResponse(exchange, response);			
-	}
+
 	
 	public static String getQuery(HttpExchange exchange) {
 		URI requestURI = exchange.getRequestURI();
@@ -64,5 +60,13 @@ public class Servidor implements IServidor{
 		return returnMap;
 	}
 	
+	public static void addHeaders(HttpExchange exchange) {
+		exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+		if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type,Authorization");
+		}
+		
+	}
 	
 }

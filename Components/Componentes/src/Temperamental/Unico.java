@@ -14,7 +14,7 @@ public class Unico extends Estresse{
         if(numPergunta == 0){
             System.out.println("O medico ainda bem calmo");
         }
-        else if(numPergunta < 8 && agora <= 8000){
+        else if(numPergunta < 8 || agora <= 8000){
             acaoNormal();
         }
         else{

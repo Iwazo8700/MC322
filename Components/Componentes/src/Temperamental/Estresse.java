@@ -42,7 +42,7 @@ public abstract class Estresse{
                 break;
             case 4:
                 if(repeticao != 2)
-                    {System.out.println("Doutor pediu para sair, ele foi fumar e quase acabou com um maco de cigarro");
+                    {System.out.println("Doutor pediu para saiu para fumar e quase acabou com um maco de cigarro");
                     repeticao = 2;
                     try { Thread.sleep (4000); } catch (InterruptedException ex) {}}
                 else{acaoExtrema();}
@@ -120,14 +120,13 @@ public abstract class Estresse{
     }
     public void novoPaciente(){
         tempoPaciente = System.currentTimeMillis();
-        update();
         numPaciente++;
+        update();
     }
 
 
     public void novaPergunta(){
-        
-        update();
+    	update();
         numPergunta++;
     }
     protected abstract void update();
