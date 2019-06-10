@@ -267,7 +267,7 @@ public class Somador {
 ```
 ## Fazendo o lado do cliente
 Nosso servidor está feito agora, só precisamos fazê-lo rodar. Precisamos agora fazer o lado do cliente. Como faremos isso? <br />
-![Screenshot](imgs/voce-decide.png)
+![Screenshot](imgs/voce-decide.jpg)
 Essa é a maravilha do servidor, com ele, qualquer aplicação que consiga fazer requests do tipo get pode se comunicar com ele, um código em python de uma que se conecta com o servidor pela soma ficaria assim (de um modo simples):
 ```python
 from urllib import request
