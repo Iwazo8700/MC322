@@ -260,7 +260,32 @@ public class Somador {
 		};
 		
 		servidor.addContext("/somador/", handler);
+		servidor.initialize();
 	}
+
 }
 ```
-							
+## Fazendo o lado do cliente
+Nosso servidor está feito agora, só precisamos fazê-lo rodar. Precisamos agora fazer o lado do cliente. Como faremos isso? <br />
+![Screenshot](imgs/voce-decide.png)
+Essa é a maravilha do servidor, com ele, qualquer aplicação que consiga fazer requests do tipo get pode se comunicar com ele, um código em python de uma que se conecta com o servidor pela soma ficaria assim (de um modo simples):
+```python
+from urllib import request
+
+s1 = input()
+s2 = input()
+
+r = request.urlopen(f"http://localhost:8500/somador/?s1={s1}&s2={s2}")
+
+response = str(request.read(), 'utf-8')
+
+r.close()
+
+print(r)
+```
+Você pode usar o que quiser: python, javascript, php... O mundo é seu playground
+
+
+
+
+					
