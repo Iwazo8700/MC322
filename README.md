@@ -139,7 +139,7 @@ Primeiramente, aqui está a referência das classes do componente: [FAZER REFER�
 Nesse tutorial, vamos aprender a fazer um servidor recebe do cliente dois números inteiros e retorna a soma deles
 
 Para começar, precisamos que você habilite o package com.sun.net.httpserver no seu projeto do eclipse, para fazer isso siga esses passos:
-1. Configure o Build Path do seu projeto:
+1. Configure o Build Path do seu projeto: <br />
 ![Screenshot](imgs/cfgbuildpath.png)
 2. Vá e 
   
