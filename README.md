@@ -158,5 +158,109 @@ import java.io.IOException;
 import com.sun.net.httpserver.*;
 ```
 
+Depois disso, crie o objecto `servidor`:
+```java
+public class Somador {
+	
+	public static void main(String args[]) throws IOException {
+		IServidor servidor = FabricaServidor.create();
+		
+		
+	}
+}
+``` 
+O comando `FabricaServidor.create()` retorna um novo objeto do tipo Servidor, que cria um servidor local no PORT 8500, caso queira usar outra porta, coloque o número da porta desejado como parâmetro da função: `FabricaServidor.create(PORTA)`.
 
+Agora é a parte que adicionamos um context, ao servidor, vamos em partes. 
+A função `servidor.addContext` tem dois argumentos, a `String link` e o `HttpHandler handler`, o link mostra onde estará o contexto e onde nós iremos obter e mandar informações para o servidor, o link geral de um contexto é `http://localhost:[PORTA]/[link]`, nesse exemplo como a porta é 8500 e setaremos o link como "/somador/", o link geral ficará como `http://localhost:8500/somador/`, sempre coloque o caractere '/' no final do link para evitar problemas.
 
+Teremos então: 
+
+```java 
+servidor.addContext("/somador/", /*Handler*/);
+``` 
+
+Chegamos no Handler, a parte que pode ser um pouco complicada, as opções que dão para simplificar para o usuário só deixam as coisas mais confusas então decidi deixar essa parte mais crua, porém com algumas facilitações
+
+### Como declarar um Handler?
+
+Saiba que HttpHandler não é uma classe, mas sim uma interface, sempre que fomos declarar um Handler precisamos declara a função handle, então um novo Handler se parece com isso:
+
+```java
+HttpHandler handler = new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) {}
+			
+};
+```
+HttpExchange é uma classe do package `com.sun.net.httpserver` que representa os requests do contexto e pode gerar uma resposta. Basicamente é ela que trás os pedidos do cliente para o servidor, e a resposta do servidor para o cliente. Houve confusão? Calma que vai ficando mais claro.
+
+Para nosso somador, precisamos de informações dadas pelo cliente e conseguiremos elas por querys, que são consultas que no nosso caso serão feitas por meios dos links.
+A sintaxe de um query é `[LINK GERAL]/?[Variável1]=[Valor1]&[Variável2]=[Valor2]`, no nosso caso usaremos `s1` e `s2` como variáveis que representarão os números a serem somados. Um exemplo de query seria `localhost:8500/somador/?s1=10&s2=20`, que representaria que `s1 = 10` e `s2 = 20`. Agora, como conseguiremos o query de um exchange?
+
+Coloque a função `Servidor.addHeaders(exchanges)` para habilitar headers que fazem com que o servidor consiga enviar informações para javascript.
+```java
+String query = Servidor.getQuery(exchange);
+```
+A função `Servidor.getQuery` retorna o query puro de um link, que sera no caso `s1=10&s2=20`. Para conseguir os valores separados existe uma função que trata essa String de query puro:
+```java
+Map<String, String> queryDividido = Servidor.splitQuery(query);
+``` 
+Obs: para isso é necessário que você importe `java.util.Map`. Assim tempos um dicionário feito do query, `queryDividido.get("s1")` retornará a String `"10"` e assim por diante.
+
+Agora, a soma dos números, que será feita usando sintaxe básica de java (não teremos tratamento de erro para simplificar o turorial):
+
+```java
+int s1, s2;
+s1 = Integer.parseInt(queryDividido.get("s1"));
+s2 = Integer.parseInt(queryDividido.get("s2"));
+
+String response = Integer.toString(s1+s2);
+``` 
+Repare que a resposta do servidor tem que ser em forma de String, então teremos que convertê-la de volta.
+
+Agora usamos o comando de mandar a resposta ao Servidor: 
+
+```java
+Servidor.sendResponse(exchange, response);
+``` 
+Depois disso, acabamos a declaração do Handle, colocamos no context e começamos o servidor com `servidor.initialize()`
+
+O código final ficará parecido com isso:
+```java
+
+import componenteServidor.*;
+import java.io.IOException;
+import com.sun.net.httpserver.*;
+import java.util.Map;
+
+public class Somador {
+	
+	public static void main(String args[]) throws IOException {
+		IServidor servidor = FabricaServidor.create();
+		
+		HttpHandler handler = new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException{
+				Servidor.addHeaders(exchange);
+				
+				String query = Servidor.getQuery(exchange);
+				Map<String, String> queryDividido = Servidor.splitQuery(query);
+				
+				int s1, s2;
+				s1 = Integer.parseInt(queryDividido.get("s1"));
+				s2 = Integer.parseInt(queryDividido.get("s2"));
+				
+				String response = Integer.toString(s1+s2);
+				
+				Servidor.sendResponse(exchange, response);
+				
+			}
+			
+		};
+		
+		servidor.addContext("/somador/", handler);
+	}
+}
+```
+							
