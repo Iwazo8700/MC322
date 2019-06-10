@@ -59,7 +59,7 @@ Método | Objetivo
 # Componente `Temperamental`
 Campo | Valor
 ----- | -----
-Classe | Temperamental.* 
+Classe | Temperamental.\* 
 Autores | `Enzo Iwata, João Kruse, Emanuel Oliveira, Álvaro Marques`
 Objetivo | `Simula um medico com diferentes temperamentos, que vai se estressando com o passar do tempo `
 Interface | `Estresse, TemperamentoGeral`
