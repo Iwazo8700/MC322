@@ -120,8 +120,8 @@ public abstract class Estresse{
     }
     public void novoPaciente(){
         tempoPaciente = System.currentTimeMillis();
-        numPaciente++;
         update();
+        numPaciente++;
     }
 
 
