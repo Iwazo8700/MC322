@@ -8,9 +8,11 @@ function printResponse(url){
 printResponse("http://localhost:8500/quest/?s=start");
 
 function printNrefresh(url){
-	printResponse(url);
+	var y = printResponse(url);
+	
+
 	var x = printResponse("http://localhost:8500/quest/?s=start");
 	if (x == 'acabou'){
-		window.location.href="firstScene.html";
+		window.location.href="final.html";
 	}
 }

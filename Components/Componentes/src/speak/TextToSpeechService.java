@@ -36,7 +36,7 @@ public class TextToSpeechService implements ITextToSpeechService{
 			// Configura as credenciais necessarias (obtidas criando uma conta no cloud da ibm)
 
 			IamOptions iamOptions = new IamOptions.Builder()
-					  .apiKey("xFVh95prjjAl6ZgqVAjl6CcV0bINL_BrqHvhdgoaIuA3")
+					  .apiKey("RM9mapRkhqaWSBs-idLDH5NVe8A1f0ecDY-i3Hiwr317")
 					  .build();
 			novo.setIamCredentials(iamOptions);
 

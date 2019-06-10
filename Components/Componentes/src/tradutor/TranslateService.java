@@ -127,7 +127,9 @@ public class TranslateService implements ITradutorService {
 
 	@Override
 	public String translation(String text, String toLang) throws RequestTooLargeException, ServiceResponseException{
+		
 		String retorno = null;
+		try {
 		// Cria o conversor (LanguageTranslator)
 		LanguageTranslator service = setCredentials();
 
@@ -149,6 +151,9 @@ public class TranslateService implements ITradutorService {
 
 			//Pega a String resultante do translationResult
 			retorno = translationResult.getTranslations().get(0).getTranslationOutput();
+		}
+		}catch (Exception e) {
+			retorno = text;
 		}
 		return retorno;
 	}
