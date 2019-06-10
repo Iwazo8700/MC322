@@ -1,10 +1,12 @@
 <html>
     <head>
         <title>MC322</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
 	<style>
-		  .csv-input {
-		    	padding: 10px;
+		  .input10 {
+		    padding: 10px;
 			display: block;
 			margin: 15px auto;
 			border: 1px solid #ccc;
@@ -12,9 +14,14 @@
 		  }
 	</style>
     </head>
-    <body>
-        <input type="file" id="csvFileInput" class="csv-input" onchange="handleFiles(this.files)" accept=".csv">
-        <div id="output" style="position: relative; left: 200px;"></div>
+	<body style="margin: 0;">
+		<div style="width: 100%; text-align: center;">
+			<input type="file" id="csvFileInput" class="input10" onchange="handleFiles(this.files)" accept=".csv">
+		</div>
+
+        
+		<div id="output" style="position: relative;"></div>
+		
         <script type="text/javascript">
 		function handleFiles(files) {
 			if (window.FileReader) {
@@ -55,30 +62,69 @@
 		}
 
 		function drawOutput(lines){
-			//Clear previous data
 			document.getElementById("output").innerHTML = "";
 			var div = document.createElement("div");
 			for (var i = 0; i < lines.length; i++) {
-				//var row = table.insertRow(-1);
-				for (var j = 0; j < lines[i].length; j++) {
-			    //var firstNameCell = row.insertCell(-1);            
-			    var pixel =  document.createElement("div");
-			    pixel.style.position = "absolute";
-			    pixel.style.width = "1px";
-			    pixel.style.height = "1px";
-			    pixel.style.top = i;
-			    pixel.style.left = j;
-			    //pixel.style.display = block;
-
-			    var g = 255 - Math.abs(parseInt(lines[i][j], 10));
-			    var gS = g.toString();
-			    var b = 255 - Math.abs(parseInt(lines[i][j], 10));
-			    var bS = b.toString();
-			    var rgb = "rgb(255, "+bS+","+gS+")";
-			    //console.log(rgb);
-			    pixel.style.background = rgb;
-			    //firstNameCell.appendChild(pixel);
-			    div.appendChild(pixel);
+				if(i == 0){
+					var pixel =  document.createElement("div");
+					pixel.style.position = "absolute";
+					pixel.style.width = "200px";
+					pixel.style.height = lines.length;
+					pixel.style.top = "0px";
+					pixel.style.left = "0px";
+					pixel.style.borderRight = "1px solid #000";
+					div.appendChild(pixel);
+					for(var s = 0; s < lines[i].length - 1; s++){
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = lines[i+2].length;
+						pixel.style.height = "12px";
+						pixel.style.top = lines.length;
+						pixel.style.left = 200 + ((lines[i+2].length - lines[i].length)/lines[i].length)*(s+1);
+						pixel.style.color = "#000";
+						pixel.style.fontSize = "12px";
+						pixel.style.borderLeft = "1px solid #000";
+						pixel.style.paddingLeft = "3px";
+						pixel.innerText = lines[i][s];
+						div.appendChild(pixel);
+					}
+				}else if(i == 1){
+					var pixel =  document.createElement("div");
+					pixel.style.position = "absolute";
+					pixel.style.width = lines[i+1].length;
+					pixel.style.height = "1px";
+					pixel.style.top = lines.length;
+					pixel.style.left = "200px";
+					pixel.style.borderTop = "1px solid #000";
+					div.appendChild(pixel);
+					for(var d = 0; d < lines[i].length; d++){
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = lines[i+1].length;
+						pixel.style.height = "1px";
+						pixel.style.top = ((lines.length - lines[i].length)/lines[i].length) *(d+1);
+						pixel.style.left = "0px";
+						pixel.style.color = "#000";
+						pixel.style.fontSize = "12px";
+						pixel.innerText = lines[i][d];
+						div.appendChild(pixel);
+					}
+				}else{
+					for (var j = 0; j < lines[i].length; j++) {											
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = "1px";
+						pixel.style.height = "1px";
+						pixel.style.top = i;
+						pixel.style.left = 202 + parseInt(j, 10);
+						var g = 255 - Math.abs(parseInt(lines[i][j], 10));
+						var gS = g.toString();
+						var b = 255 - Math.abs(parseInt(lines[i][j], 10));
+						var bS = b.toString();
+						var rgb = "rgb(255, "+bS+","+gS+")";
+						pixel.style.background = rgb;
+						div.appendChild(pixel);
+					}					
 				}
 			}
 			document.getElementById("output").appendChild(div);
