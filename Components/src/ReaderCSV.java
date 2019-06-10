@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ReaderCSV implements ICreateArray{
+public class ReaderCSV implements ICreateFiles{
 
 	private String sintomas[] = null;
     private String diagnostico[][] = null;
     public ArrayList<String[]> array = new ArrayList<String[]>();
 	
-	public ReaderCSV(DataSetComponent data) {
+	public ReaderCSV(IDataSetComponent data) {
 		String atributos[] = data.requestAttributes();
         this.sintomas = atributos;
         String instancias[][] = data.requestInstances();
@@ -73,5 +73,5 @@ public class ReaderCSV implements ICreateArray{
 		}
 		return resultado;
 	}
-	
+	public void foundMaxValue(){}
 }

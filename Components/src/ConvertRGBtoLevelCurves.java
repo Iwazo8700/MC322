@@ -1,17 +1,18 @@
 
 import java.util.ArrayList;
 
-public class ConvertRGBtoLevelCurves implements ICreateArray{
+public class ConvertRGBtoLevelCurves implements ICreateFiles{
+	int tam = 80;
 	int vetor[][];
 	private String sintomas[] = null;
     private String diagnostico[][] = null;
 	
-	public ConvertRGBtoLevelCurves(DataSetComponent data) {
+	public ConvertRGBtoLevelCurves(IDataSetComponent data) {
 		String atributos[] = data.requestAttributes();
         this.sintomas = atributos;
         String instancias[][] = data.requestInstances();
         this.diagnostico = instancias;
-        this.vetor = new int[(diagnostico.length + 1)*50 + (diagnostico.length)][((sintomas.length + 1)+1)*50 + (sintomas.length + 1)];
+        this.vetor = new int[(diagnostico.length - 1)*tam + (diagnostico.length)][(sintomas.length)*tam + (sintomas.length + 1)];
 	}
 	public String reader() {
 		for(int i = 0; i < diagnostico.length - 1; i++) {
@@ -23,26 +24,33 @@ public class ConvertRGBtoLevelCurves implements ICreateArray{
 		return imprimeArray();
 	}
 	public void createArray(String diagnostico[]){}
-	
+	public void foundMaxValue(){}
 	public void createArray(int x, int y, int ij, int ij1, int i1j, int i1j1) {
-		this.vetor[x*51][y*51] = ij;
+		this.vetor[x*(tam + 1)][y*(tam + 1)] = ij;
 		
-		float dy = (((float)i1j - (float)ij)/50);
-		for(int j = 0; j < 51; j++) {
-			this.vetor[x*51 + j][y*51] = (int)(ij + dy*j);
+		float dy = (((float)i1j - (float)ij)/tam);
+		for(int j = 0; j < (tam + 1); j++) {
+			this.vetor[x*(tam + 1) + j][y*(tam + 1)] = (int)(ij + dy*j);
+		}
+		float dx = (((float)ij1 - (float)ij)/tam);
+		for(int i = 0; i < (tam + 1); i++) {
+			this.vetor[x*(tam + 1)][y*(tam + 1) + i] = (int)(ij + dx*i);
 		}
 	}
 	public void preenche() {
 		for(int i = 0; i < this.vetor.length; i++) {
 			for(int j = 0; j < this.vetor[i].length; j++) {
-				int a = (j/51)*51;
-				int b = ((j/51)+1)*51;
-				if(b == 459) {
-					b = 457;
+				if(i%(tam + 1) != 0 && j %(tam + 1) != 0) {
+					int x1 = (j/(tam + 1))*(tam + 1);
+					int x2 = x1 + (tam + 1);
+					int y1 = (i/(tam + 1))*(tam + 1);
+					int y2 = y1 + (tam + 1);
+					
+					float dx = ((float)vetor[i][x2] - (float)vetor[i][x1])/tam;
+					float dy = ((float)vetor[y2][j] - (float)vetor[y1][j])/tam;
+					vetor[i][j] = (int)(vetor[i][x1]+(j%(tam + 1))*dx + vetor[y1][j]+(i%(tam + 1))*dy)/2;	
 				}
-				float dx = ((float)vetor[i][b] - (float)vetor[i][a])/50;
-				vetor[i][j] = (int)(vetor[i][a] + dx*(j/51));
-				
+							
 			}
 		}
 	}

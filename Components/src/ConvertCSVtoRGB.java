@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ConvertCSVtoRGB implements ICreateArray{
+public class ConvertCSVtoRGB implements ICreateFiles{
 	private String sintomas[] = null;
     private String diagnostico[][] = null;
 	private int maxValue;
 	private ArrayList<String[]> array = new ArrayList<String[]>();
 	
-	public ConvertCSVtoRGB(DataSetComponent data) {
+	public ConvertCSVtoRGB(IDataSetComponent data) {
 		String atributos[] = data.requestAttributes();
         this.sintomas = atributos;
         String instancias[][] = data.requestInstances();
