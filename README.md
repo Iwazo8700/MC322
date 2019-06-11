@@ -281,7 +281,7 @@ response = str(request.read(), 'utf-8')
 
 r.close()
 
-print(r)
+print(response)
 ```
 Você pode usar o que quiser: python, javascript, php... O mundo é seu playground
 
