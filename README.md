@@ -92,35 +92,29 @@ Método | Objetivo
 -------| --------
 `CriaTemperamento` | `Recebe como parametro uma String, dentre elas podendo ser: calmo, puto, putasso, real e unico; a opcao de unico gerara uma situacao para um unico paciente, assim o temperamento do medico mudara com a quantidade de perguntas e pela demora com que elas foram feitas; as opções restantes servem para o caso de um medico que atende varios pacientes, assim simulando o dia de um medico; os outros sao autoexplicativos, o real passa pelos outros estados de forma respectiva indo do medico calmo para o puto e depois para o putasso.`
 
-# Componente Interface Gráfica para Web
+# Componente Curvas de Nível
 | Campo | Valor |
 | ------------- | ------------- |
 | Classe |	<caminho completo da classe com pacotes> |
 | Autores | João Kruse, Enzo Iwata, Emanuel Oliveira e Álvaro Marques |
-| Objetivo | Exibir um gráfico de curva de nível com a relação sintomas x doenças, analisando seu comportamento |
-| Interface | IGraphWeb |
-~~~
-public interface IGraphWeb extends IDataSet{
-  public int countSintomasDoencas();
-  public int regraTres(int t, int n);
-  public String[] cores(); //rgb(0,0,255) -> rgb(0,255,0)
-  public String[][] coresSintomasDoencas();
-  public String[][] constroiGraph();
-  public String[][] geraCSV();
-}
-  
-  
-~~~
-# Interface IGraphWeb
+| Objetivo | Exibir um gráfico de curva de nível com a relação sintomas x doenças |
+| Interface | ICreateFiles, IWriter, IDataSetComponent |
+
+# Interface ICreateFiles
 ## Exibir um gráfico de curvas de nível mostrando a relação dos sintomas com as doenças
 | Método | Objetivo |
 | ------------- | ------------- |
-| countSintomasDoencas() | Esse método conta quantas vezes determinado sintoma aparece na doença e contabiliza |
-| regraTres() | Recebe o número total de diagnósticos da doença e o número que o sintoma aparece, converte para uma escala de 0 a 255 |
-| cores() | Faz uma requisição na regraTres() e constrói uma String rgb com a cor do ponto no gráfico |
-| coresSintomasDoencas() | Retorna uma String com as cores dos pontos Doença x Sintoma, por uma média ponderada |
-| constroiGraph() | A partir das coresSintomasDoencas(), constrói o restante do gráfico com as cores de cada ponto/pixel, criando visualmente a curva de nível |
-| geraCSV() | salva o gráfico em um arquivo csv, cor por coordenada, que será lido pelo programa web com JavaScript |
+| String reader() | Esse método faz a leitura da matriz criado pelo DataSetComponent |
+| void createArray(String diagnostico[]) | Cria um novo array utilizando um algoritmo baseado no método que é implementado de maneiras diferentes para cada uma das três classes que são implementadas por essa interface e envia-o par o método abaixo|
+| String imprimeArray() | Esse método vai imprimindo no array os novos dados |
+| void foundMaxValue(); | Esse método é implementado apenas em uma das classes, corresponde a encontrar o maior número de sintomas para as doenças, igualando a ele o número 255 do RGB para criar a matriz de cores |
+
+# Interface IWriter
+## Vai escrevendo os novos CSV's a partir da geração do array que as classes implementadas por ICreateFiles geram
+| Método | Objetivo |
+| ------------- | ------------- |
+| void write() | Esse método cria e escreve no arquivo |
+
 
 # Interface IServidor
 ## Cria um servidor HTTP para realizar troca de informações entre diferentes programas
@@ -133,8 +127,6 @@ public interface IGraphWeb extends IDataSet{
 ## Tutorial de como fazer o seu servidor:
 
 Olá, se você está lendo isso tem a chance de querer utilizar nosso servidor :)
-
-Primeiramente, aqui está a referência das classes do componente: [FAZER REFERÊNCIA DO ROLÊ]
 
 Nesse tutorial, vamos aprender a fazer um servidor recebe do cliente dois números inteiros e retorna a soma deles
 
