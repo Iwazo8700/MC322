@@ -67,8 +67,8 @@ Interface | `Estresse, TemperamentoGeral`
 ~~~
 
 public abstract class Estresse{
-  public void novoPaciente();
-  public void novaPergunta();
+  public String novoPaciente();
+  public String novaPergunta();
  }
  
  public class TemperamentoGeral{
@@ -115,16 +115,16 @@ Método | Objetivo
 | ------------- | ------------- |
 | void write() | Esse método cria e escreve no arquivo |
 
-
-# Interface IServidor
-## Cria um servidor HTTP para realizar troca de informações entre diferentes programas
+# Componente `Servidor`
+## Interface IServidor
+### Cria um servidor HTTP para realizar troca de informações entre diferentes programas
 
 | Método | Objetivo |
 | ------------- | ------------- |
 | initialize() | Inicia o Servidor |
 | addContext(String path, HttpHandler h)  | Adiciona rota ao servidor e seu respectivo Handler |
 
-## Tutorial de como fazer o seu servidor:
+### Tutorial de como fazer o seu servidor:
 
 Olá, se você está lendo isso tem a chance de querer utilizar nosso servidor :)
 
@@ -174,7 +174,7 @@ servidor.addContext("/somador/", /*Handler*/);
 
 Chegamos no Handler, a parte que pode ser um pouco complicada, as opções que dão para simplificar para o usuário só deixam as coisas mais confusas então decidi deixar essa parte mais crua, porém com algumas facilitações
 
-### Como declarar um Handler?
+#### Como declarar um Handler?
 
 Saiba que HttpHandler não é uma classe, mas sim uma interface, sempre que fomos declarar um Handler precisamos declara a função handle, então um novo Handler se parece com isso:
 
@@ -257,7 +257,7 @@ public class Somador {
 
 }
 ```
-## Fazendo o lado do cliente
+### Fazendo o lado do cliente
 Nosso servidor está feito agora, só precisamos fazê-lo rodar. Precisamos agora fazer o lado do cliente. Como faremos isso? <br />
 ![Screenshot](imgs/voce-decide.jpg) <br /> 
 Essa é a maravilha do servidor, com ele, qualquer aplicação que consiga fazer requests do tipo get pode se comunicar com ele, um código em python de uma que se conecta com o servidor pela soma ficaria assim (de um modo simples):
