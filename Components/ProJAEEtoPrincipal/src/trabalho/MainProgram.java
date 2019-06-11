@@ -29,9 +29,12 @@ public class MainProgram {
 	static Map<String,String> imgs_jpg;
 	static String ask;
 	static String r03 = "null";
-	
+	static boolean speaked = false;
 	public static void main(String args[]) throws IOException {		
 		final String csvUrl = "/Users/alvaromarques/csv322/zombie-health-new-cases20.csv";
+		final String condaUrl = "/Users/alvaromarques/miniconda3/bin/python3";
+		final String pythonUrl = "/Users/alvaromarques/marcos/pca_prototype_scatter.py";
+		
 		IServidor servidor = FabricaServidor.create();
 		IDoctor doc = new Doctor("Asdrubal");
 		IPatient pac = new Patient("Bastiao");
@@ -129,8 +132,12 @@ public class MainProgram {
 					if (!acabou)
 						ask = doc.ask();		
 					if (ask.startsWith("D")) {
+						
 						Speak.speak(ask.substring(2));
+							
+
 						acabou = true;
+						
 					}
 					Servidor.sendResponse(exchange, getText(ask));
 						
@@ -145,7 +152,7 @@ public class MainProgram {
 				 	Servidor.addHeaders(exchange);
 		            Headers headers = exchange.getResponseHeaders();
 		            headers.add("Content-Type", "image/jpg");	            
-		            IPCA_Analysis a = new PCA_Analysis("/Users/alvaromarques/miniconda3/bin/python3", "/Users/alvaromarques/marcos/pca_prototype_scatter.py",csvUrl);
+		            IPCA_Analysis a = new PCA_Analysis(condaUrl, pythonUrl,csvUrl);
 		            a.pca();		            
 		            File file = new File (csvUrl.substring(0, csvUrl.length()-3) + "jpg");
 		            byte[] bytes  = new byte [(int)file.length()];
@@ -167,9 +174,18 @@ public class MainProgram {
 		            Servidor.sendResponse(exchange, r03);
 			 }});
 		servidor.initialize();		
-		}
-	
 		
+	
+		servidor.addContext("/traduz/", new HttpHandler() {
+			public void handle(HttpExchange exchange) throws IOException{
+				Servidor.addHeaders(exchange);
+				Map<String, String> q = Servidor.splitQuery(Servidor.getQuery(exchange));
+				String traduzido = getText(q.get("s"));
+				Servidor.sendResponse(exchange, traduzido);
+			}
+		});
+		
+	}
 		
 	
 	public static String getText(String text) {

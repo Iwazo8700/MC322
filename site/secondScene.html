@@ -9,14 +9,16 @@
 		<title>Equipe JAEE</title>
 	</head>
 	<body style="background-color: #181818;">
+		
+			
 		<div style="text-align: center; color: #fff; margin-top: 150px;">
 			<div style="float: left; width: 50%; text-align: center; padding: 20px;">
 				<p style="text-align: center; margin-bottom: 100px;">
 					<a href="questionario.html" onclick="getResponse('http://localhost:8500/sec/?q=none&s=true')">
-						<button class="btn btn-success"> Iniciar a consulta </button>
+						<button class="btn btn-success" id="init_con_btn"> Iniciar a consulta </button>
 					</a>
 				</p>
-				<p> Esse é o trabalho de MC322 apresentado pela Equipe JAEE </p>
+				<p id="intro_p"> Trabalho de MC322 apresentado pela Equipe JAEE </p>
 				<ul>
 					<li>Álvaro Marques Macêdo 212466</li>
 					<li>Emanuel de Souza Oliveira 170442</li>
@@ -27,7 +29,11 @@
 			<div style="float: left; width: 50%;">
 				<img src="img/doctorsauro.jpg" width="500px" height="500px">
 			</div>
-			
+
+		<script type="text/javascript">
+			document.getElementById("init_con_btn").innerHTML = getResponse("http://localhost:8500/traduz/?s=Iniciar%20a%20consulta");
+			document.getElementById("intro_p").innerHTML = getResponse("http://localhost:8500/traduz/?s=Trabalho%20de%20MC322%20apresentado%20pela%20Equipe%20JAEE");
+		</script>
 		</div>
 	</body>
 </html>

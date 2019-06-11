@@ -12,16 +12,18 @@
 	<h2 class="alert alert-success" id="doenca"></h2>
 	<div style="float: left; width: 100%;">
 		<div style="float: left; width: 50%;">
-			<button onclick="verFoto();" class="btn btn-primary">Visualizar Gráfico</button>
+			<button onclick="verFoto();" class="btn btn-primary" id="view_mcs">Visualizar Gráfico</button>
 		</div>
 		<div style="float: left; width: 50%;">
 			<a href="emanuelCSV.html">
-				<button onclick="verFoto();" class="btn btn-primary"> Visualizar Curvas de Nível </button>
+				<button onclick="verFoto();" class="btn btn-primary" id="view_em"> Visualizar Curvas de Nível </button>
 			</a>	
 		</div>
 	</div>
 	<div id="grafico" style="float: left; width: 100%; margin-top: 20px;"></div>
 	<script type="text/javascript">
+		document.getElementById("view_mcs").innerHTML = getResponse("http://localhost:8500/traduz/?s=Visualizar%20Grafico");
+		document.getElementById("view_em").innerHTML = getResponse("http://localhost:8500/traduz/?s=Visualizar%20Curvas%20de%20Nivel");
 		document.getElementById("doenca").innerHTML = printResponse("http://localhost:8500/quest/?s=start");
 		function verFoto(){
 			document.getElementById("grafico").innerHTML = "<img src=\"http://localhost:8500/plot/\" width='800px' height='auto'>";
