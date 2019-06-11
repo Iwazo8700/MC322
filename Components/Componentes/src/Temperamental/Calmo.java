@@ -12,17 +12,19 @@ public class Calmo extends Estresse{
         ultimo = false;
     }
 
-    public void update(){
+    public String update(){
+    	String retorno = "";
         long agora = System.currentTimeMillis() - tempoInicial;
         //acoes de tempo total(mais extremas)
         long consulta = System.currentTimeMillis() - tempoPaciente;
         if(agora >= 5000)//um minuto de programa(EH O CALMO)
-            acaoNormal();
+            retorno = acaoNormal();
         else if(consulta >= 2000)
-            acaoNormal();
+            retorno = acaoNormal();
         else if(numPaciente/3 == 1)
-            acaoCalma();
+            retorno = acaoCalma();
         else if(agora >= 1000)
-            acaoCalma();
+            retorno = acaoCalma();
+        return retorno;
     }
 }

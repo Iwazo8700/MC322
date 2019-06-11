@@ -3,21 +3,30 @@
 	<head>
 		<meta charset="utf-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-		<script type="text/javascript" src="index.js">		
-		</script>
-		<title></title>
+		<script type="text/javascript" src="index.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<title>Equipe JAEE</title>
 	</head>
 	<body style="background-color: #ffffcc;">
-		<div style="float: left; width: 100%; text-align: center;">
-			<h1>Para começar, escolha um idioma.</h1>
+		<div style="float: left; width: 100%; text-align: center; padding: 100px;">
 			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
 				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=en')">
-					<img src="img/en.png" width="100px" height="100px">
+					<img src="img/en.png" width="200px" height="200px">
 				</a>
 			</div>
 			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
 				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=pt')">
-					<img src="img/pt.png" width="100px" height="100px">
+					<img src="img/pt.png" width="200px" height="200px">
+				</a>
+			</div>
+			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
+				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=es')">
+					<img src="img/es.png" width="200px" height="200px">
+				</a>
+			</div>
+			<div style="float: left; width: 50%; margin-top: 50px; text-align: center;">
+				<a href="secondScene.html" class="button" onclick="getResponse('http://localhost:8500/intro/?lingua=de')">
+					<img src="img/dt.png" width="200px" height="200px">
 				</a>
 			</div>
 		</div>

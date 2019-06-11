@@ -9,18 +9,20 @@ public class Putasso extends Estresse{
     }
 
 
-    public void update(){
+    public String update(){
+    	String retorno;
         long agora = System.currentTimeMillis() - tempoInicial;
         //acoes de tempo total(mais extremas)
         long consulta = System.currentTimeMillis() - tempoPaciente;
         if(agora >= 30000)//um minuto de programa(EH O CALMO)
-            acaoExtrema();
+            retorno = acaoExtrema();
         else if(consulta >= 3000)
-            acaoExtrema();
+            retorno = acaoExtrema();
         else if(numPaciente/3 == 1)
-            acaoNormal();
+            retorno = acaoNormal();
         else
-            acaoNormal();
+            retorno = acaoNormal();
+        return retorno;
     }
 
 

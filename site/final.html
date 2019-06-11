@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Final</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<title>Diagnóstico</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<meta charset="utf-8">
 </head>
-<body>
-	Parabéns, você é um ser doente
-
+<body style="background-color: #ffffcc;">
+	<div style="float: left; width: 100%; padding: 20px; text-align: center;">
+	<h2 class="alert alert-success" id="doenca"></h2>
+	<div style="float: left; width: 100%;">
+		<div style="float: left; width: 50%;">
+			<button onclick="verFoto();" class="btn btn-primary">Visualizar Gráfico</button>
+		</div>
+		<div style="float: left; width: 50%;">
+			<a href="emanuelCSV.html">
+				<button onclick="verFoto();" class="btn btn-primary"> Visualizar Curvas de Nível </button>
+			</a>	
+		</div>
+	</div>
+	<div id="grafico" style="float: left; width: 100%; margin-top: 20px;"></div>
+	<script type="text/javascript">
+		document.getElementById("doenca").innerHTML = printResponse("http://localhost:8500/quest/?s=start");
+		function verFoto(){
+			document.getElementById("grafico").innerHTML = "<img src=\"http://localhost:8500/plot/\" width='800px' height='auto'>";
+		}
+	</script>
 </body>
 </html>

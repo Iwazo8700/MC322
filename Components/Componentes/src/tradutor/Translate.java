@@ -9,8 +9,6 @@ public class Translate {
 	 * Metodos que dao um wrap no Translator para deixa-los como static
 	 */
 	public static String translate(String text) throws RequestTooLargeException, ServiceResponseException{
-		if (service == null)
-				service = new TranslateService();
 		String resultado = service.translation(text);
 		return resultado;
 	}

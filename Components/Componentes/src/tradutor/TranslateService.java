@@ -1,7 +1,7 @@
 package tradutor;
 import java.util.List;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
-import com.ibm.cloud.sdk.core.service.exception.NotFoundException;
+
 import com.ibm.cloud.sdk.core.service.exception.RequestTooLargeException;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.security.IamOptions;
@@ -109,7 +109,7 @@ public class TranslateService implements ITradutorService {
 
 			retorno = translationResult.getTranslations().get(0).getTranslationOutput();
 
-		}catch(NotFoundException e) { //Erro por nao haver modelo ou lingua de destino = lingua de entrada
+		}catch(Exception e) { //Erro por nao haver modelo ou lingua de destino = lingua de entrada
 
 			retorno = text;
 
@@ -129,16 +129,24 @@ public class TranslateService implements ITradutorService {
 	public String translation(String text, String toLang) throws RequestTooLargeException, ServiceResponseException{
 		
 		String retorno = null;
-		try {
+		
 		// Cria o conversor (LanguageTranslator)
 		LanguageTranslator service = setCredentials();
-
+		
+		String eng = text;
+		eng = Translate.translate(text);
 		// Converte o texto para ingles, pois eh a lingua com maior suporte de conversoes
-		String eng = Translate.translate(text);
+		
 
+		if (toLang.equals("en")){
+			retorno = eng;
+			
+		}
+		else {
+		
 		//Cria um objeto TranslateOptions que guarda o texto, a lingua para converter e
 		// a lingua do texto a ser convertido
-		if(eng != null) {
+		try {	
 			TranslateOptions translateOptions = new TranslateOptions.Builder()
 					.addText(eng)
 					.source(Language.ENGLISH)
@@ -151,9 +159,10 @@ public class TranslateService implements ITradutorService {
 
 			//Pega a String resultante do translationResult
 			retorno = translationResult.getTranslations().get(0).getTranslationOutput();
-		}
+		
 		}catch (Exception e) {
-			retorno = text;
+			retorno = eng;
+		}
 		}
 		return retorno;
 	}

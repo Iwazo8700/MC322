@@ -5,14 +5,19 @@ function printResponse(url){
     return x;
 }
 
-printResponse("http://localhost:8500/quest/?s=start");
+var x = printResponse("http://localhost:8500/quest/?s=start");
 
 function printNrefresh(url){
 	var y = printResponse(url);
 	
 
 	var x = printResponse("http://localhost:8500/quest/?s=start");
-	if (x == 'acabou'){
-		window.location.href="final.html";
+	if (x[0] == "D"){
+		location.replace("final.html");
+		console.log("hey");
+	}else{
+		console.log(x[0]);
 	}
+
+
 }

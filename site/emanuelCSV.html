@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <title>MC322</title>
+
+		<script type="text/javascript" src="index.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		  .input10 {
+		    padding: 10px;
+			display: block;
+			margin: 15px auto;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		  }
+	</style>
+    </head>
+	<body style="margin: 0;">
+		<div style="width: 100%; text-align: center;">
+			<!--<button class="btn btn-success" style="margin-top: 200px; width: 150px; height: 100px" onclick="processData(printResponse('http://localhost:8500/plotcsv/'))"  >
+				Carregar Csv
+			</button>-->
+		</div>
+
+        
+		<div id="output" style="position: relative;"></div>
+		
+        <script type="text/javascript">
+        var alreadyLoaded = false;
+		function handleFiles(files) {
+			if (window.FileReader) {
+				getAsText(files[0]);
+			} else {
+				alert('FileReader are not supported in this browser.');
+			}
+		}
+		function getAsText(fileToRead) {
+			var reader = new FileReader();
+			// Handle errors load
+			reader.onload = loadHandler;
+			reader.onerror = errorHandler;
+			// Read file into memory as UTF-8      
+			reader.readAsText(fileToRead);
+		}
+		function loadHandler(event) {
+			var csv = event.target.result;
+			processData(csv);             
+		}
+
+		function processData(csv) {
+			if (csv == "null"){
+				if (!alreadyLoaded){
+					document.write("<button class=\"btn btn-success\" style=\"margin-top: 200px; width: 150px; height: 100px\" onclick=\"processData(printResponse('http://localhost:8500/plotcsv/'))\">");
+					alreadyLoaded = true;
+				}
+				return;
+			}
+		    var allTextLines = csv.split(/\r\n|\n/);
+		    var lines = [];
+		    while (allTextLines.length) {
+			lines.push(allTextLines.shift().split(','));
+		    }
+			console.log(lines);
+			drawOutput(lines);
+		}
+		function errorHandler(evt) {
+			if(evt.target.error.name == "NotReadableError") {
+				alert("Canno't read file !");
+			}
+		}
+		function drawOutput(lines){
+			document.getElementById("output").innerHTML = "";
+			var div = document.createElement("div");
+			for (var i = 0; i < lines.length; i++) {
+				if(i == 0){
+					var pixel =  document.createElement("div");
+					pixel.style.position = "absolute";
+					pixel.style.width = "200px";
+					pixel.style.height = lines.length;
+					pixel.style.top = "0px";
+					pixel.style.left = "0px";
+					pixel.style.borderRight = "1px solid #000";
+					div.appendChild(pixel);
+					for(var s = 0; s < lines[i].length - 1; s++){
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = lines[i+2].length;
+						pixel.style.height = "12px";
+						pixel.style.top = lines.length;
+						pixel.style.left = 200 + ((lines[i+2].length - lines[i].length)/lines[i].length)*(s+1);
+						pixel.style.color = "#000";
+						pixel.style.fontSize = "12px";
+						pixel.style.borderLeft = "1px solid #000";
+						pixel.style.paddingLeft = "3px";
+						pixel.innerText = lines[i][s];
+						div.appendChild(pixel);
+					}
+				}else if(i == 1){
+					var pixel =  document.createElement("div");
+					pixel.style.position = "absolute";
+					pixel.style.width = lines[i+1].length;
+					pixel.style.height = "1px";
+					pixel.style.top = lines.length;
+					pixel.style.left = "200px";
+					pixel.style.borderTop = "1px solid #000";
+					div.appendChild(pixel);
+					for(var d = 0; d < lines[i].length; d++){
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = lines[i+1].length;
+						pixel.style.height = "1px";
+						pixel.style.top = ((lines.length - lines[i].length)/lines[i].length) *(d+1);
+						pixel.style.left = "0px";
+						pixel.style.color = "#000";
+						pixel.style.fontSize = "12px";
+						pixel.innerText = lines[i][d];
+						div.appendChild(pixel);
+					}
+				}else{
+					for (var j = 0; j < lines[i].length; j++) {											
+						var pixel =  document.createElement("div");
+						pixel.style.position = "absolute";
+						pixel.style.width = "1px";
+						pixel.style.height = "1px";
+						pixel.style.top = i;
+						pixel.style.left = 202 + parseInt(j, 10);
+						var g = 255 - Math.abs(parseInt(lines[i][j], 10));
+						var gS = g.toString();
+						var b = 255 - Math.abs(parseInt(lines[i][j], 10));
+						var bS = b.toString();
+						var rgb = "rgb(255, "+bS+","+gS+")";
+						pixel.style.background = rgb;
+						div.appendChild(pixel);
+					}					
+				}
+			}
+			document.getElementById("output").appendChild(div);
+			
+		}
+		processData(printResponse('http://localhost:8500/plotcsv/'));
+	</script>
+    </body>
+</html>

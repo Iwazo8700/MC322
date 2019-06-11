@@ -17,4 +17,5 @@ function getResponse(url_link){
 function printResponse(url){
     var x = getResponse(url);
     console.log(x);
+    return x;
 }

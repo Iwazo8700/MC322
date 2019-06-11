@@ -8,8 +8,8 @@ public class Example {
 	public static void main(String args[]) {
 		Scanner scan = new Scanner(System.in);
 		try {
-			System.out.println(Translate.translate(scan.nextLine()));
-			System.out.println(Translate.translate(scan.nextLine(), "de"));
+			System.out.println(Translate.translate("Hello"));
+			System.out.println(Translate.translate("Oi tudo bem", "en"));
 			Speak.speak(scan.nextLine());
 		}
 		catch(Exception e) {

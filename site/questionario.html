@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-	<script type="text/javascript" src="index.js">		
-	</script>
-	<script type="text/javascript" src="questionario.js"></script>
-	<title></title>
-</head>
-<body>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script type="text/javascript" src="questionario.js"></script>
+		<title>Equipe JAEE</title>
+	</head>
+	<body style="background-color: #ffffcc;">
+		<script type="text/javascript">
+			if (x[0] == "D"){
+				location.replace("final.html");
+			}
+		</script>
+		<div style="float: left; width: 100%; text-align: center;">
+			<div style="float: left; width: 100%; margin-bottom: 100px;">
+				<h1 style="margin-bottom: 100px;"> Consulta </h1>
+				<p id="pergunta">
+					
+				</p>
+			</div>
+			<a href="questionario.html">
+			<div style="float: left; width: 50%;">
+				<button onclick="printNrefresh('http://localhost:8500/quest/?s=sim')" type="button" class="btn btn-default btn-lg alert alert-success">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				</button>
+			</div>
+			</a>
+			<a href="questionario.html">
+			<div style="float: left; width: 50%;">
+				<button onclick="printNrefresh('http://localhost:8500/quest/?s=nao')" type="button" class="btn btn-default btn-lg alert alert-danger">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+			</div>		
+			</a>
 
+		</div>
+		
+		<script type="text/javascript">
 
+			document.getElementById("pergunta").innerHTML = x;
 
-<button onclick="printNrefresh('http://localhost:8500/quest/?s=sim')">Sim</button>
+		</script>
 
-
-<button onclick="printNrefresh('http://localhost:8500/quest/?s=nao')">Não</button>
-</a>
-</body>
+		
+	</body>
 </html>

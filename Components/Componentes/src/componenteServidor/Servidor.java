@@ -40,7 +40,13 @@ public class Servidor implements IServidor{
 		os.close();
 	}	
 	
-
+	public static void sendResponse(HttpExchange exchange, byte response[]) throws IOException {
+		exchange.sendResponseHeaders(200, response.length);
+		OutputStream os = exchange.getResponseBody();
+		os.write(response);
+		os.close();
+	}	
+	
 	
 	public static String getQuery(HttpExchange exchange) {
 		URI requestURI = exchange.getRequestURI();

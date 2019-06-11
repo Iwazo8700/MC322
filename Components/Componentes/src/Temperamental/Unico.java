@@ -9,18 +9,23 @@ public class Unico extends Estresse{
         cancelou = false;
     }
 
-    public void update(){
+    public String update(){
+    	String retorno = "";
         long agora = System.currentTimeMillis() - tempoInicial;
         if(numPergunta == 0){
-            System.out.println("O medico ainda bem calmo");
+            retorno = ("O medico ainda bem calmo\n");
         }
         else if(numPergunta < 8 || agora <= 8000){
-            acaoNormal();
+        	if(numPergunta == 1);
+        		retorno += ("O medico comecou a ficar estressado e cansado!!\n");
+            retorno += acaoNormal();
         }
         else{
-            acaoExtrema();
+        	if(numPergunta == 9)
+        		retorno += ("O medico esta MUITO cansado!!!\n");
+            retorno += acaoExtrema();
         }
 
-
+        return retorno;
     }
 }

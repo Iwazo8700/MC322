@@ -13,43 +13,45 @@ public class Real extends Estresse{
     }
 
 
-    public void update(){
+    public String update(){
+    	String retorno = "";
         long agora = System.currentTimeMillis() - tempoInicial;
         //acoes de tempo total(mais extremas)
         long consulta = System.currentTimeMillis() - tempoPaciente;
         if(agora <= 4000 && numPaciente < 4){
             if(calmo){
-                System.out.println("O medico esta calmo!");
+                retorno+=("O medico esta calmo!\n");
                 calmo = false;
                 puto = true;
             }
 
             if(consulta >= 3000)
-                acaoNormal();
+                retorno +=acaoNormal();
             else if(consulta <= 1000)
-                acaoCalma();
+                retorno += acaoCalma();
         }else if(agora <= 7000 && numPaciente < 8){
             if(puto){
-                System.out.println("O medico comecou a ficar estressado e cansado!!");
-                acaoNormal();
+                retorno += ("O medico comecou a ficar estressado e cansado!!\n");
+                retorno += acaoNormal();
                 puto = false;
                 putasso = true;
             }
             if(consulta >= 3000)
-                acaoExtrema();
+                retorno += acaoExtrema();
             else if(consulta <= 1000)
-                acaoNormal();
+                retorno += acaoNormal();
         }else{
             if(putasso){
-                System.out.println("O medico esta MUITO cansado!!!");
-                acaoExtrema();
+                retorno += ("O medico esta MUITO cansado!!!\n");
+                retorno += acaoExtrema();
                 putasso = false;
             }if(consulta >= 1000)
-                acaoExtrema();
+                retorno = acaoExtrema();
             else
-                acaoNormal();
+                retorno = acaoNormal();
 
         }
+        return retorno;
     }
 
 }

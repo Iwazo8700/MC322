@@ -3,19 +3,31 @@
 	<head>
 		<meta charset="utf-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-		<script type="text/javascript" src="index.js">		
-		</script>
+		<script type="text/javascript" src="index.js"></script>
 		<script type="text/javascript" src="secondScene.js"></script>
-		<title></title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<title>Equipe JAEE</title>
 	</head>
-	<body style="background-color: #ffffcc;">
-		<div style="text-align: center;">
-			<h1> oi eu sou o andreis, você escolheu a lingua.. </h1>
-
-
-			<a href="questionario.html" onclick="getResponse('http://localhost:8500/sec/?q=none&s=true')">
-				Vamos para o questionario agora
-			</a>
+	<body style="background-color: #181818;">
+		<div style="text-align: center; color: #fff; margin-top: 150px;">
+			<div style="float: left; width: 50%; text-align: center; padding: 20px;">
+				<p style="text-align: center; margin-bottom: 100px;">
+					<a href="questionario.html" onclick="getResponse('http://localhost:8500/sec/?q=none&s=true')">
+						<button class="btn btn-success"> Iniciar a consulta </button>
+					</a>
+				</p>
+				<p> Esse é o trabalho de MC322 apresentado pela Equipe JAEE </p>
+				<ul>
+					<li>Álvaro Marques Macêdo 212466</li>
+					<li>Emanuel de Souza Oliveira 170442</li>
+					<li>Enzo Hideki Iwata 215394</li>
+					<li>João Gabriel Segato Kruse 218615</li>
+				</ul>
+			</div>
+			<div style="float: left; width: 50%;">
+				<img src="img/doctorsauro.jpg" width="500px" height="500px">
+			</div>
+			
 		</div>
 	</body>
 </html>
